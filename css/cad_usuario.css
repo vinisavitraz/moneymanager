@@ -1,0 +1,14 @@
+#cabecalho {
+    background: #ba1a1a;
+}
+body { 
+	background: #efefef;
+	font-family: Sans-serif;
+}
+#titulo_cabecalho {
+	color: white;
+}
+
+.container {
+	text-align: center;
+}

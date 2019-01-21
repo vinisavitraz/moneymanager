@@ -1,0 +1,40 @@
+nav {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.navbar { 
+    margin-bottom: 0px;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #efefef;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >
+        a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #ba1a1a; 
+    background-color: white;
+}
+
+.navbar-default {
+    background-color: #ba1a1a;
+    border-color: #ba1a1a;
+    border-radius: 1px;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: white;
+    text-decoration: none;
+    background-color: #ba1a1a; 
+}
+#logo {
+	color: white;
+}
+#sair {
+	text-align: right;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white; 
+}
