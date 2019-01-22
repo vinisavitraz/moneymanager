@@ -1,0 +1,40 @@
+#cabecalho {
+    background: #28784D;
+}
+body { 
+	background: #efefef;
+	font-family: Sans-serif;
+}
+#titulo_cabecalho {
+	color: white;
+}
+
+#container {
+	text-align: center;
+	border-radius: 10px;
+    width: 300px;
+    height: 325px; 
+    background-color: #ba1a1a;
+    color: #e2dede;
+    position: absolute; 
+	left: 500px; 
+	top: 275px;
+	font-size: 20px;
+}
+#form_login {
+	
+	margin-top: 25px;
+}
+
+.input-group {
+	padding: 10px;
+}
+
+#cadastrar {
+	color: white;
+	font-size: 15px;
+}
+#logo {
+	color: white;
+	font-size: 45px;
+}

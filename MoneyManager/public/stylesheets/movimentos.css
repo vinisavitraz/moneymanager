@@ -1,0 +1,9 @@
+body { 
+	background-color: #f4f4f4;
+	font-family: Sans-serif;
+}
+
+.panel-default>.panel-heading {
+	background-color: #ba1a1a;
+	color:white;
+}
