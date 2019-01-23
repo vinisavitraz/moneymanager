@@ -1,5 +1,7 @@
 package model;
 
+import model.entity.Categoria;
+
 import java.util.Date;
 
 public class Movimento {
