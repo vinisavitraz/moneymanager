@@ -6,7 +6,9 @@ import br.framework.classes.DataBase.Transaction;
 import br.framework.classes.helpers.Types;
 import br.framework.exceptions.ReadSequenceValueException;
 import br.framework.interfaces.IConnection;
+import br.framework.interfaces.IEntityClass;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Strings;
 import exceptions.JsonParseException;
@@ -26,6 +28,15 @@ public class CategoriaDao {
         super();
         this.connection = connection;
         this.manager = new EntityManager(this.connection);
+    }
+
+    public ObjectNode serializeToJson(List<Categoria> categorias, ObjectNode resultNode){
+        ArrayNode arrayNode = resultNode.putArray("categorias");
+        for (Categoria categoria: categorias) {
+            ObjectNode node = this.serializeToJson(categoria);
+            arrayNode.add(node);
+        }
+        return resultNode;
     }
 
     public ObjectNode serializeToJson(Categoria categoria) {
@@ -82,6 +93,38 @@ public class CategoriaDao {
             }
             errors.add("Ocorreu erro interno na tentativa de gravação da categoria. " + e.getMessage());
         }
+    }
+
+    public List<Categoria> getCategorias() throws Exception{
+        EntityManager manager = new EntityManager(this.connection);
+        List<Categoria> result = new ArrayList<>();
+
+        String SQL = "select * from categoria ";
+        SQL +=" where cat_status = 'N' order by cat_id ";
+
+        List<IEntityClass> records = manager.query(SQL, Categoria.class);
+
+        for (IEntityClass record: records) {
+            result.add((Categoria) record);
+        }
+
+        return result;
+    }
+
+    public List<Categoria> getCategoriasUsuario(Integer id) throws Exception{
+        EntityManager manager = new EntityManager(this.connection);
+        List<Categoria> result = new ArrayList<>();
+
+        String SQL = "select * from categoria ";
+        SQL += " where cat_idusuario = '" + id.toString() + "' and cat_status = 'N' order by cat_id ";
+
+        List<IEntityClass> records = manager.query(SQL, Categoria.class);
+
+        for (IEntityClass record: records) {
+            result.add((Categoria) record);
+        }
+
+        return result;
     }
 
     public Long getNextId() throws ReadSequenceValueException {

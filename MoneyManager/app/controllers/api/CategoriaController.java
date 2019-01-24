@@ -24,20 +24,19 @@ public class CategoriaController {
         return ok(result);
     }*/
 
-   /*
+
     public Result getCategorias(){
         BaseJsonNode result = (ObjectNode) ResultJson.makeOk("Dados das categorias pesquisados com sucesso");
         IConnection connection = null;
         try {
             connection = ConnectionFactory.newConnection();
-            DepartamentoDao dao = new DepartamentoDaoImpl(connection);
-            List<Departamento> departamentos = dao.getDepartamentos(lastID);
-            result = dao.serializeToJson(departamentos, (ObjectNode) result);
+            CategoriaDao dao = new CategoriaDao(connection);
+            List<Categoria> categorias = dao.getCategorias();
+            result = dao.serializeToJson(categorias, (ObjectNode) result);
         } catch (SQLException e) {
-            logger.error("Exception caught", e);
+            result = ResultJson.makeError(e, "Erro ao pesquisar categorias");
         } catch (Exception e) {
-            logger.error("Exception caught", e);
-            result = ResultJson.makeError(e, "Erro ao pesquisar departamentos");
+            result = ResultJson.makeError(e, "Erro ao pesquisar categorias");
         } finally {
             if (connection != null) {
                 connection.close();
@@ -45,7 +44,27 @@ public class CategoriaController {
         }
         return ok(result);
     }
-    */
+
+    public Result getCategoriasUsuario(Integer id){
+        BaseJsonNode result = (ObjectNode) ResultJson.makeOk("Dados das categorias pesquisados com sucesso");
+        IConnection connection = null;
+        try {
+            connection = ConnectionFactory.newConnection();
+            CategoriaDao dao = new CategoriaDao(connection);
+            List<Categoria> categorias = dao.getCategoriasUsuario(id);
+            result = dao.serializeToJson(categorias, (ObjectNode) result);
+        } catch (SQLException e) {
+            result = ResultJson.makeError(e, "Erro ao pesquisar categorias");
+        } catch (Exception e) {
+            result = ResultJson.makeError(e, "Erro ao pesquisar categorias");
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return ok(result);
+    }
+
 
     public Result insertCategoria() {
         Result returnResult = null;

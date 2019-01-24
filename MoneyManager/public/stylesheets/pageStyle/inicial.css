@@ -4,6 +4,11 @@ body {
 	font-family: Sans-serif;
 }
 
+.panel-default>.panel-heading {
+	background-color: #28784D;
+	color:white;
+}
+
 .fixo {
   height: 200px;
 

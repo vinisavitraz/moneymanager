@@ -11,6 +11,7 @@ public class Operacao extends EntityClass implements Serializable {
     private Codigo id;
     private Status tipo;
     private Literal descricao;
+    private Codigo idUsuario;
     private Status status;
     private Status ativo;
 
@@ -38,6 +39,14 @@ public class Operacao extends EntityClass implements Serializable {
 
     public void setDescricao(Literal descricao) {
         this.descricao = descricao;
+    }
+
+    public Codigo getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Codigo idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public Status getStatus() {

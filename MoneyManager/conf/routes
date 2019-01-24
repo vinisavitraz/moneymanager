@@ -15,8 +15,16 @@ GET     /assets/*file        controllers.Assets.versioned(path="/public/", file:
 
 GET      /movimentos                   controllers.web.MovimentoWeb.index()
 
-GET      /categorias                   controllers.web.CategoriaWeb.index()
 
-POST     /v1.0/categoria               controllers.api.CategoriaController.insertCategoria()
+
+GET     /v1.0/usuarios                 controllers.api.UsuarioController.getUsuarios()
+GET     /v1.0/usuario/id/:id           controllers.api.UsuarioController.getUsuario(id:Integer)
+GET     /v1.0/usuarioautenticado       controllers.api.UsuarioController.getUsuarioAutenticado()
+
+
+GET      /categorias                   controllers.web.CategoriaWeb.index()
+GET      /v1.0/categorias                           controllers.api.CategoriaController.getCategorias()
+GET      /v1.0/categorias/usuario/:id              controllers.api.CategoriaController.getCategoriasUsuario(id:Integer)
+POST     /v1.0/categoria                    controllers.api.CategoriaController.insertCategoria()
 
       

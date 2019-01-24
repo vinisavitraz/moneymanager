@@ -16,14 +16,14 @@ public class Usuario  extends EntityClass implements Serializable {
     private Literal email;
     private Literal usuario;
     private Literal senha;
-    private Decimal saldoDinheiro;
-    private Literal idOperacoes;
-    private Literal idRecorrentes;
     private Status status;
     private Status ativo;
 
-    //add contrutor status ativo
-
+    public Usuario(){
+        super();
+        this.status.setValue("N");
+        this.ativo.setValue("S");
+    }
 
     public Codigo getId() {
         return id;
@@ -63,30 +63,6 @@ public class Usuario  extends EntityClass implements Serializable {
 
     public void setSenha(Literal senha) {
         this.senha = senha;
-    }
-
-    public Decimal getSaldoDinheiro() {
-        return saldoDinheiro;
-    }
-
-    public void setSaldoDinheiro(Decimal saldoDinheiro) {
-        this.saldoDinheiro = saldoDinheiro;
-    }
-
-    public Literal getIdOperacoes() {
-        return idOperacoes;
-    }
-
-    public void setIdOperacoes(Literal idOperacoes) {
-        this.idOperacoes = idOperacoes;
-    }
-
-    public Literal getIdRecorrentes() {
-        return idRecorrentes;
-    }
-
-    public void setIdRecorrentes(Literal idRecorrentes) {
-        this.idRecorrentes = idRecorrentes;
     }
 
     public Status getStatus() {
