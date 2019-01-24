@@ -2,24 +2,19 @@ package model.entity;
 
 import br.framework.annotations.TableAnnotation;
 import br.framework.classes.DataBase.EntityClass;
-import model.field.Codigo;
-import model.field.Literal;
-import model.field.Status;
+import model.field.*;
+
 import java.io.Serializable;
 
-@TableAnnotation(tableName = "Categoria", prefix = "cat_")
-public class Categoria extends EntityClass implements Serializable {
+@TableAnnotation(tableName = "Operacao", prefix = "op_")
+public class Operacao extends EntityClass implements Serializable {
     private Codigo id;
+    private Status tipo;
     private Literal descricao;
     private Status status;
     private Status ativo;
 
-    public Categoria (){
-        super();
-        this.status.setValue("N");
-        this.ativo.setValue("S");
-
-    }
+    //add contrutor status ativo
 
     public Codigo getId() {
         return id;
@@ -27,6 +22,14 @@ public class Categoria extends EntityClass implements Serializable {
 
     public void setId(Codigo id) {
         this.id = id;
+    }
+
+    public Status getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Status tipo) {
+        this.tipo = tipo;
     }
 
     public Literal getDescricao() {

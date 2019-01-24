@@ -1,4 +1,4 @@
-package controllers.web;
+package controllers.api;
 
 import com.fasterxml.jackson.databind.node.BaseJsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;

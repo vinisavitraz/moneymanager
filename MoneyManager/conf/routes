@@ -4,17 +4,19 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                    controllers.HomeController.index
+GET     /                              controllers.web.InicialWeb.index()
 
 # An example controller showing how to write asynchronous code
 GET     /message             controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file        controllers.Assets.versioned(path="/public/", file: Asset)
 
 
-GET     /teste               controllers.web.MovimentoController.teste()
+GET      /movimentos                   controllers.web.MovimentoWeb.index()
 
-POST     /v1.0/categoria               controllers.web.CategoriaController.insertCategoria()
+GET      /categorias                   controllers.web.CategoriaWeb.index()
+
+POST     /v1.0/categoria               controllers.api.CategoriaController.insertCategoria()
 
       

@@ -1,4 +1,4 @@
-package controllers.web;
+package controllers.api;
 
 import br.framework.interfaces.IConnection;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static play.mvc.Controller.request;
-import static play.mvc.Controller.session;
-import static play.mvc.Results.ok;
+
+import static play.mvc.Results.*;
 
 public class CategoriaController {
    /* public Result getCategorias(){
@@ -48,6 +48,7 @@ public class CategoriaController {
     */
 
     public Result insertCategoria() {
+        Result returnResult = null;
         BaseJsonNode result = (ObjectNode) ResultJson.makeOk("Dados da categoria inseridos com sucesso");
         IConnection connection = null;
         try {
@@ -56,25 +57,28 @@ public class CategoriaController {
             connection = ConnectionFactory.newConnection();
             CategoriaDao dao = new CategoriaDao(connection);
             Categoria categoria = dao.jsonToEntity((ObjectNode) categoriaJson);
+            dao.insert(categoria, errors);
+            returnResult = ok(result);
 
-            /*
-            dao.insert(departamento, errors, usuario);
-            if (errors.size()>0) {
+            if (errors.size() > 0) {
                 result = ResultJson.makeError(errors);
+                returnResult = badRequest(result);
             } else {
-                ResultJson.setToResponse(result, "codigo", departamento.getCodigo().getValue());
+                ResultJson.setToResponse(result, "id", categoria.getId().getValue());
             }
-            */
+
         } catch (SQLException e) {
-            //logger.error("Exception caught", e);
+            result = ResultJson.makeError(e, "Erro no banco de dados ao inserir categoria");
+            returnResult = internalServerError(result);
         } catch (Exception e) {
-            //logger.error("Exception caught", e);
             result = ResultJson.makeError(e, "Erro ao inserir categoria");
+            returnResult = internalServerError(result);
         } finally {
             if (connection != null) {
                 connection.close();
             }
         }
-        return ok(result);
+
+        return returnResult;
     }
 }
