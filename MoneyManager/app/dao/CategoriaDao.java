@@ -61,6 +61,14 @@ public class CategoriaDao {
             categoria.getDescricao().setValue(descricao);
         }
 
+        node = json.get("idUsuario");
+        if (node==null) {
+            errors.add("Não foi localizado o campo 'idUsuario'");
+        } else {
+            Integer idUsuario = node.asInt();
+            categoria.getIdUsuario().setValue(idUsuario);
+        }
+
         if (errors.size()>0) {
             throw new JsonParseException("Falha na estrutura dos dados fornecidos", errors);
         }

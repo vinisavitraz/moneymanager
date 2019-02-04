@@ -5,7 +5,7 @@ $(function(){
     });
 
 
-    $('#form-test').on('submit',function(e){
+    $('#form-categorias').on('submit',function(e){
         if(validarForm()){
             $("#erros").show();
             return false;
@@ -27,12 +27,12 @@ $(function(){
 
         var erro = false;
 
-        var nome_input = $("input[name='nome']").val();
+        var nome_input = $("input[name='descricao']").val();
 
         if(!varPossuiConteudo(nome_input)) {
             erro = true;
 
-            $("#resultado_submit ul").append("<li>" + "Nome é obrigatório" + "</li>");
+            $("#resultado_submit ul").append("<li>" + "Descrição é obrigatório" + "</li>");
         }
 
         $("#resultado_submit").show();
@@ -40,9 +40,14 @@ $(function(){
         return erro;
     }
 
-    function inserirCategoria(nome){
+    function inserirCategoria(){
+        $('#form-categorias').append("<input type='hidden' class='campo_form' name='idUsuario' value='" + userAuthenticated.id + "'>");
         var dados = formToJson('.campo_form');
 
+        console.log(dados);
+
+        requestAjaxJson('POST', '/v1.0/categoria', dados);
+        /*
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -54,55 +59,32 @@ $(function(){
             error: function(e){
                 console.log(e);
             }
-        });
+        }); */
 
-    }
-
-    function callBack(data){
-        var resposta = data;
-
-        if(resposta[0] == 'ok'){
-            $("#resultado_submit").show();
-            $("#sucesso").show();
-
-            $('#form-test').each (function(){
-                this.reset();
-            });
-
-            setTimeout(function() { $("#sucesso").hide(); }, 5000);
-            setTimeout(function() { $("#resultado_submit").hide(); }, 5000);
-        }
-        else if(resposta[0] == 'erro'){
-            var erros = resposta[1];
-
-            for (var i = 0; i < erros.length; i++) {
-                $("#resultado_submit ul").append(erros[i]);
-            }
-            $("#resultado_submit").show();
-            $("#erros").show();
-        }
-        else if(resposta[0] == 'erro_sql'){
-            var descricao_erro = resposta[1];
-
-            $("#resultado_submit ul").append("Erro no banco de dados: ");
-            $("#resultado_submit ul").append(descricao_erro);
-
-            $("#resultado_submit").show();
-            $("#erros").show();
-        }
     }
 
     function buscarCategorias(){
         $.getJSON("/v1.0/categorias/usuario/" + userAuthenticated.id, function (json) {
-            console.log(json);
+            var tabelaCategorias = $('#tabelaCategorias');
+            var linhasTabela = [];
 
-            $.each(json.categorias, function (i, item) {
-                console.log()
-                //criar tabela
-                //$('#unidadeDest').append($('<option>', {value: item.codigo, text: item.codigo + " - " + item.nome}));
+            $.each(json.categorias, function (i, categoria) {
+                var linha = '';
+
+                linha += '<tr>';
+                linha += '<td>' + categoria.id + '</td>';
+                linha += '<td>' + categoria.descricao + '</td>';
+                linha += '<td>' + categoria.ativo + '</td>';
+                linha += "<td id= 'editar_registro' value='" + categoria.id + "'><span class='glyphicon glyphicon-edit'></span></td>";
+                linha += "<td id='excluir_registro' value='" + categoria.id + "'><span class='glyphicon glyphicon-remove' id='remover_registro'></span></td>";
+                linha += '<tr>';
+                linhasTabela.push(linha);
+            });
+
+            $.each(linhasTabela, function (i, linha){
+                tabelaCategorias.append(linha);
             });
         });
-
     }
 
 });

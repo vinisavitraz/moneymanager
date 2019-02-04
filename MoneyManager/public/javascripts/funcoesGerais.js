@@ -7,7 +7,7 @@ function formToJson(campoForm) {
 
 function formToObject(campoForm) {
     var object = {};
-    object['data_cadastro'] = getDataNow();
+
     //percorre os campos do formulario
     $(campoForm).each(function (index) {
         // verefica o type do campo para pegar atribuir diferentes valores
